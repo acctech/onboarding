@@ -153,7 +153,6 @@ export function CoverPage(props) {
         </Box>
       </Box>
       <Box
-        zIndex={0}
         sx={{
           backgroundImage: "url(" + process.env.PUBLIC_URL + "/bg.jpg)",
           backgroundSize: "cover",
@@ -167,6 +166,7 @@ export function CoverPage(props) {
           alignItems: "center",
           justifyContent: "center",
           position: "absolute",
+          zIndex: 0,
         }}
       ></Box>
       {debug && (
