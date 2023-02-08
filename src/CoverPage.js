@@ -153,17 +153,17 @@ export function CoverPage(props) {
         zIndex={0}
         sx={{
           backgroundImage: "url(" + process.env.PUBLIC_URL + "/bg.jpg)",
-          backgroundSize: windowSize.height ? "cover" : "cover",
+          backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           backgroundAttachment: "fixed",
           filter: "brightness(0.15)",
+          height: windowSize.height ?? "100vh",
+          width: windowSize.width ?? "100vw",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
         }}
-        height={windowSize.height ?? "100vh"}
-        width={windowSize.width ?? "100vw"}
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
       ></Box>
       {debug && (
         <Box
