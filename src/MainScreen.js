@@ -2,6 +2,10 @@ import React, { useEffect } from "react";
 import EastIcon from "@mui/icons-material/East";
 import { CoverPage } from "./CoverPage";
 
+const APPLE_DEVICE_URL = "https://start.cem.com.au";
+const OTHER_DEVICE_URL =
+  "https://clearpass.cem.org.au/onboard/device_provisioning_2.php";
+
 export default function MainScreen(props) {
   const { isOffSite, ipAddress, onForceChange, debug } = props;
   const isAppleDevice =
@@ -17,9 +21,7 @@ export default function MainScreen(props) {
       " using a " +
       window.ui.os +
       " device. " +
-      (isAppleDevice
-        ? "Redirecting in 3 seconds..."
-        : "Please choose your user type below:"),
+      (isAppleDevice ? "Redirecting in 3 seconds..." : ""),
     buttons:
       isOffSite === true
         ? isAppleDevice
@@ -27,7 +29,7 @@ export default function MainScreen(props) {
           : [
               {
                 label:
-                  "Your device is not supported for Offsite Setup. Please wait until you are on campus to complete the setup process.",
+                  "Your device is not supported for Offsite Setup. \nPlease wait until you are on campus to complete the setup process.",
                 color: "#A88D5D",
                 textColor: "white",
                 icon: <EastIcon fontSize="small" sx={{ ml: 1 }}></EastIcon>,
@@ -49,7 +51,7 @@ export default function MainScreen(props) {
       // Redirect with 3 second timeout
       setTimeout(() => {
         if (!debug) {
-          window.location = "https://start.cem.com.au";
+          window.location = APPLE_DEVICE_URL;
         }
       }, 3000);
     } else {
@@ -59,12 +61,28 @@ export default function MainScreen(props) {
         // Redirect with 3 second timeout
         setTimeout(() => {
           if (!debug) {
-            window.location =
-              "https://clearpass.cem.org.au/onboard/device_provisioning_2.php";
+            window.location = OTHER_DEVICE_URL;
           }
         }, 3000);
       } else {
-        console.log("Offsite " + window.ui.os + " device, waiting for user..");
+        fetch(OTHER_DEVICE_URL)
+          .then((response) => {
+            console.log(
+              "Still can reach other device url as " +
+                window.ui.os +
+                " device, redirecting to url."
+            );
+            // Redirect with 3 second timeout
+            setTimeout(() => {
+              if (!debug) {
+                window.location = OTHER_DEVICE_URL;
+              }
+            }, 3000);
+          })
+          .catch((error) => {
+            // Show offsite other device message
+            console.log("Offsite " + window.ui.os + " device, doing nothing.");
+          });
       }
     }
   });

@@ -28,7 +28,7 @@ function App() {
       .catch((error) => {
         console.error("Error:", error, "Safe failing back to onsite setup");
         setIsAddress("169.254.0.0");
-        setIsOffSite(false);
+        setIsOffSite(true);
       });
   }, []);
 
