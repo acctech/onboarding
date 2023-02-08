@@ -67,6 +67,7 @@ export function CoverPage(props) {
     onForceChange,
     ipAddress,
     isOffSite,
+    debug,
   } = props;
 
   const windowSize = useWindowSize();
@@ -172,21 +173,23 @@ export function CoverPage(props) {
         alignItems="center"
         justifyContent="center"
       ></Box>
-      <Box
-        position="absolute"
-        zIndex={100}
-        right={0}
-        top={0}
-        onClick={() => {
-          onForceChange();
-        }}
-      >
-        <Box p={1}>
-          <Typography textColor="gray" fontSize="0.6rem">
-            {ipAddress} {isOffSite ? "Offsite" : "Onsite"}
-          </Typography>
+      {debug && (
+        <Box
+          position="absolute"
+          zIndex={100}
+          right={0}
+          top={0}
+          onClick={() => {
+            onForceChange();
+          }}
+        >
+          <Box p={1}>
+            <Typography textColor="gray" fontSize="0.6rem">
+              {ipAddress} {isOffSite ? "Offsite" : "Onsite"}
+            </Typography>
+          </Box>
         </Box>
-      </Box>
+      )}
     </Box>
   );
 }

@@ -5,6 +5,10 @@ import CssBaseline from "@mui/joy/CssBaseline";
 import MainScreen from "./MainScreen";
 
 function App() {
+  // Get Query Params if debug exists set debug to true
+  const debug = window.location.search.includes("debug");
+  if (debug) console.log("Debug Mode: ", debug);
+
   const [isOffSite, setIsOffSite] = React.useState(false);
   const [ipAddress, setIsAddress] = React.useState(null);
 
@@ -37,6 +41,7 @@ function App() {
         onForceChange={() => {
           setIsOffSite(!isOffSite);
         }}
+        debug={debug}
       />
     </CssVarsProvider>
   );

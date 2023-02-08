@@ -3,7 +3,7 @@ import EastIcon from "@mui/icons-material/East";
 import { CoverPage } from "./CoverPage";
 
 export default function MainScreen(props) {
-  const { isOffSite, ipAddress, onForceChange } = props;
+  const { isOffSite, ipAddress, onForceChange, debug } = props;
   const isAppleDevice =
     window.ui.os.toLowerCase().includes("mac") ||
     window.ui.os.toLowerCase().includes("ios");
@@ -48,7 +48,9 @@ export default function MainScreen(props) {
       console.log("Apple Device Recognised, redirecting...");
       // Redirect with 3 second timeout
       setTimeout(() => {
-        // window.location = "https://start.cem.com.au";
+        if (!debug) {
+          window.location = "https://start.cem.com.au";
+        }
       }, 3000);
     } else {
       console.log("Non-Apple Device Recognised, checking if on campus..");
@@ -56,8 +58,10 @@ export default function MainScreen(props) {
         console.log("On Campus " + window.ui.os + " device, redirecting...");
         // Redirect with 3 second timeout
         setTimeout(() => {
-          // window.location =
-          //   "https://clearpass.cem.org.au/onboard/device_provisioning_2.php";
+          if (!debug) {
+            window.location =
+              "https://clearpass.cem.org.au/onboard/device_provisioning_2.php";
+          }
         }, 3000);
       } else {
         console.log("Offsite " + window.ui.os + " device, waiting for user..");
@@ -74,6 +78,7 @@ export default function MainScreen(props) {
       isOffSite={isOffSite}
       ipAddress={ipAddress}
       onForceChange={onForceChange}
+      debug={debug}
     />
   );
 }
