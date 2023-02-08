@@ -3,16 +3,18 @@ import EastIcon from "@mui/icons-material/East";
 import { CoverPage } from "./CoverPage";
 
 export default function MainScreen(props) {
-  const { debug, APPLE_DEVICE_URL, isAppleDevice } = props;
+  const { debug, APPLE_DEVICE_URL, isAppleDevice, onSite } = props;
 
   const chooseUserType = {
     title: "WELCOME TO",
     subtitle: "Christian Education Ministries",
     description:
-      "You appear to be offsite using a " +
+      "You appear to be " +
+      (onSite ? "onsite" : "offsite") +
+      " using a " +
       window.ui.os +
       " device. " +
-      (isAppleDevice
+      (isAppleDevice || onSite
         ? "Redirecting..."
         : "Your device is not supported for Offsite Setup. \nPlease wait until you are on campus to complete the setup process."),
     buttons: isAppleDevice

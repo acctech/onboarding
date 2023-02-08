@@ -17,24 +17,30 @@ function App() {
     window.ui.os.toLowerCase().includes("mac") ||
     window.ui.os.toLowerCase().includes("ios");
 
+  const [onSite, setOnSite] = React.useState(false);
+
   React.useEffect(() => {
     if (isAppleDevice) {
-      console.log("Apple Device Recognised, redirecting...");
+      console.log("Apple Device, redirecting...");
       if (!debug) {
         window.location = APPLE_DEVICE_URL;
       }
     } else {
       fetch(OTHER_DEVICE_URL, {
-        setTimeout: 1000,
+        setTimeout: 500,
+        mode: "no-cors",
       })
         .then((response) => {
+          setOnSite(true);
+
           console.log(
             "Can reach other device url as " +
               window.ui.os +
               " device, redirecting to url."
           );
 
-          if (response.ok) {
+          if (!debug) {
+            console.info("Redirecting to: " + OTHER_DEVICE_URL);
             window.location = OTHER_DEVICE_URL;
           }
         })
@@ -44,7 +50,7 @@ function App() {
           );
         });
     }
-  }, []);
+  }, [isAppleDevice, debug]);
 
   return (
     <CssVarsProvider>
@@ -53,6 +59,7 @@ function App() {
         debug={debug}
         APPLE_DEVICE_URL={APPLE_DEVICE_URL}
         isAppleDevice={isAppleDevice}
+        onSite={onSite}
       />
     </CssVarsProvider>
   );

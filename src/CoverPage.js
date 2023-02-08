@@ -102,7 +102,7 @@ export function CoverPage(props) {
         >
           <Typography
             variant="plain"
-            fontSize={{ xs: "1.1rem", md: "3rem" }}
+            fontSize={{ xs: "1.5rem", md: "3rem" }}
             fontWeight={700}
             textColor="white"
             textAlign="center"
@@ -121,7 +121,7 @@ export function CoverPage(props) {
             variant="plain"
             textColor="lightgray"
             textAlign="center"
-            fontSize={{ xs: "0.8rem", md: "0.9rem" }}
+            fontSize={{ xs: "0.8rem", md: "1.2rem" }}
             fontWeight={500}
             fontFamily="Figtree"
           >
