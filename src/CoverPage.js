@@ -64,7 +64,11 @@ export function CoverPage(props) {
   const windowSize = useWindowSize();
 
   return (
-    <Box>
+    <Box
+      sx={{
+        backgroundColor: "black",
+      }}
+    >
       <Box
         zIndex={10}
         position="absolute"
