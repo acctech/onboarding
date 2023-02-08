@@ -68,8 +68,8 @@ export function CoverPage(props) {
       <Box
         zIndex={10}
         position="absolute"
-        height="100vh"
-        width="100vw"
+        height={windowSize.height ?? "100vh"}
+        width={windowSize.width ?? "100vw"}
         display="flex"
         alignItems="center"
         justifyContent={windowSize.height > 780 ? "center" : "top"}
@@ -158,8 +158,8 @@ export function CoverPage(props) {
           backgroundAttachment: "fixed",
           filter: "brightness(0.15)",
         }}
-        height="100vh"
-        width="100vw"
+        height={windowSize.height ?? "100vh"}
+        width={windowSize.width ?? "100vw"}
         display="flex"
         alignItems="center"
         justifyContent="center"
