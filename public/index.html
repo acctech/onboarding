@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta
+      name="viewport"
+      content="initial-scale=1, width=device-width, minimal-ui"
+    />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Device registration page" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>CEM Device Registration</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <script>
+      // Copyright (C) 2011 by Ben Brooks Scholz
+      //
+      // Permission is hereby granted, free of charge, to any person obtaining a copy
+      // of this software and associated documentation files (the "Software"), to deal
+      // in the Software without restriction, including without limitation the rights
+      // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+      // copies of the Software, and to permit persons to whom the Software is
+      // furnished to do so, subject to the following conditions:
+      //
+      // The above copyright notice and this permission notice shall be included in
+      // all copies or substantial portions of the Software.
+      //
+      // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+      // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+      // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+      // AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+      // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+      // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+      // THE SOFTWARE.
+      //
+      // via https://github.com/benbscholz/detect
+
+      (function (window) {
+        var browser,
+          version,
+          mobile,
+          os,
+          osversion,
+          bit,
+          ua = window.navigator.userAgent,
+          platform = window.navigator.platform;
+
+        if (/MSIE/.test(ua)) {
+          browser = "Internet Explorer";
+
+          if (/IEMobile/.test(ua)) {
+            mobile = 1;
+          }
+
+          version = /MSIE \d+[.]\d+/.exec(ua)[0].split(" ")[1];
+        } else if (/Chrome/.test(ua)) {
+          // Platform override for Chromebooks
+          if (/CrOS/.test(ua)) {
+            platform = "CrOS";
+          }
+
+          browser = "Chrome";
+          version = /Chrome\/[\d\.]+/.exec(ua)[0].split("/")[1];
+        } else if (/Opera/.test(ua)) {
+          browser = "Opera";
+
+          if (/mini/.test(ua) || /Mobile/.test(ua)) {
+            mobile = 1;
+          }
+        } else if (/Android/.test(ua)) {
+          browser = "Android Webkit Browser";
+          mobile = 1;
+          os = /Android\s[\.\d]+/.exec(ua)[0];
+        } else if (/Firefox/.test(ua)) {
+          browser = "Firefox";
+
+          if (/Fennec/.test(ua)) {
+            mobile = 1;
+          }
+          version = /Firefox\/[\.\d]+/.exec(ua)[0].split("/")[1];
+
+          // AppleWebKit is for the iOS captive portal browser
+        } else if (/Safari/.test(ua) || /AppleWebKit/.test(ua)) {
+          browser = "Safari";
+
+          if (/iPhone/.test(ua) || /iPad/.test(ua) || /iPod/.test(ua)) {
+            os = "iOS";
+            mobile = 1;
+          }
+        }
+
+        if (!version) {
+          version = /Version\/[\.\d]+/.exec(ua);
+
+          if (version) {
+            version = version[0].split("/")[1];
+          } else if (/Opera\/[\.\d]+/.exec(ua)) {
+            version = /Opera\/[\.\d]+/.exec(ua)[0].split("/")[1];
+          } else {
+            version = "";
+          }
+        }
+
+        if (platform === "MacIntel" || platform === "MacPPC") {
+          os = "Mac OS X";
+          osversion = /10[\.\_\d]+/.exec(ua)[0];
+          if (/[\_]/.test(osversion)) {
+            osversion = osversion.split("_").join(".");
+          }
+        } else if (platform === "CrOS") {
+          os = "ChromeOS";
+        } else if (platform === "Win32" || platform == "Win64") {
+          if (/ARM/.test(ua)) {
+            os = "Windows on ARM";
+          } else {
+            os = "Windows";
+          }
+          bit = platform.replace(/[^0-9]+/, "");
+        } else if (!os && /Android/.test(ua)) {
+          os = "Android";
+        } else if (!os && /Linux/.test(platform)) {
+          os = "Linux";
+        } else if (!os && /Windows/.test(ua)) {
+          os = "Windows";
+        }
+
+        window.ui = {
+          browser: browser,
+          version: version,
+          mobile: mobile,
+          os: os,
+          osversion: osversion,
+          bit: bit,
+        };
+      })(this);
+    </script>
+  </body>
+</html>
