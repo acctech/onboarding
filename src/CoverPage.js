@@ -148,7 +148,7 @@ export function CoverPage(props) {
         >
           <Box width={windowSize.height > 780 ? "20%" : "10%"}>
             <img
-              src="cem-logo.png"
+              src={process.env.PUBLIC_URL + "/cem-logo.png"}
               width="100%"
               alt="Christian Education Ministries"
             ></img>
@@ -159,7 +159,7 @@ export function CoverPage(props) {
         id={"bg"}
         zIndex={0}
         sx={{
-          backgroundImage: "url(/bg.jpg)",
+          backgroundImage: "url(" + process.env.PUBLIC_URL + "/bg.jpg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
