@@ -20,7 +20,9 @@ function App() {
   React.useEffect(() => {
     if (isAppleDevice) {
       console.log("Apple Device Recognised, redirecting...");
-      window.location = APPLE_DEVICE_URL;
+      if (!debug) {
+        window.location = APPLE_DEVICE_URL;
+      }
     } else {
       fetch(OTHER_DEVICE_URL, {
         setTimeout: 1000,

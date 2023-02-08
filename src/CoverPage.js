@@ -74,12 +74,13 @@ export function CoverPage(props) {
         alignItems="center"
         justifyContent={windowSize.height > 780 ? "center" : "top"}
         flexDirection="column"
+        py={windowSize.height > 780 ? 0 : 4}
       >
         <Box py={0}>
           <Typography
             variant="plain"
             fontWeight={100}
-            fontSize={{ xs: "0.9rem", md: "1.5rem" }}
+            fontSize={{ xs: "1rem", md: "1.5rem" }}
             textColor="white"
             fontFamily="Figtree"
             letterSpacing={2}
@@ -97,7 +98,7 @@ export function CoverPage(props) {
         >
           <Typography
             variant="plain"
-            fontSize={{ xs: "1rem", md: "3rem" }}
+            fontSize={{ xs: "1.1rem", md: "3rem" }}
             fontWeight={700}
             textColor="white"
             textAlign="center"
@@ -116,7 +117,7 @@ export function CoverPage(props) {
             variant="plain"
             textColor="lightgray"
             textAlign="center"
-            fontSize={{ xs: "0.7rem", md: "0.9rem" }}
+            fontSize={{ xs: "0.8rem", md: "0.9rem" }}
             fontWeight={500}
             fontFamily="Figtree"
           >
@@ -152,7 +153,7 @@ export function CoverPage(props) {
         zIndex={0}
         sx={{
           backgroundImage: "url(" + process.env.PUBLIC_URL + "/bg.jpg)",
-          backgroundSize: "cover",
+          backgroundSize: windowSize.height ? "cover" : "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           backgroundAttachment: "fixed",
