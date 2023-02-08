@@ -4,44 +4,53 @@ import { CssVarsProvider } from "@mui/joy/styles";
 import CssBaseline from "@mui/joy/CssBaseline";
 import MainScreen from "./MainScreen";
 
+const APPLE_DEVICE_URL = "https://start.cem.com.au";
+const OTHER_DEVICE_URL =
+  "https://clearpass.cem.org.au/onboard/device_provisioning_2.php";
+
 function App() {
   // Get Query Params if debug exists set debug to true
   const debug = window.location.search.includes("debug");
   if (debug) console.log("Debug Mode: ", debug);
 
-  const [isOffSite, setIsOffSite] = React.useState(false);
-  const [ipAddress, setIsAddress] = React.useState(null);
+  const isAppleDevice =
+    window.ui.os.toLowerCase().includes("mac") ||
+    window.ui.os.toLowerCase().includes("ios");
 
   React.useEffect(() => {
-    fetch("https://api.ipify.org?format=json", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setIsAddress(data.ip);
-        let offSite = !data.ip.startsWith("165.228");
-        setIsOffSite(offSite);
+    if (isAppleDevice) {
+      console.log("Apple Device Recognised, redirecting...");
+      window.location = APPLE_DEVICE_URL;
+    } else {
+      fetch(OTHER_DEVICE_URL, {
+        setTimeout: 1000,
       })
-      .catch((error) => {
-        console.error("Error:", error, "Safe failing back to onsite setup");
-        setIsAddress("169.254.0.0");
-        setIsOffSite(true);
-      });
+        .then((response) => {
+          console.log(
+            "Can reach other device url as " +
+              window.ui.os +
+              " device, redirecting to url."
+          );
+
+          if (response.ok) {
+            window.location = OTHER_DEVICE_URL;
+          }
+        })
+        .catch((error) => {
+          console.log(
+            "Cannot reach other device url as " + window.ui.os + " device."
+          );
+        });
+    }
   }, []);
 
   return (
     <CssVarsProvider>
       <CssBaseline />
       <MainScreen
-        isOffSite={isOffSite}
-        ipAddress={ipAddress}
-        onForceChange={() => {
-          setIsOffSite(!isOffSite);
-        }}
         debug={debug}
+        APPLE_DEVICE_URL={APPLE_DEVICE_URL}
+        isAppleDevice={isAppleDevice}
       />
     </CssVarsProvider>
   );

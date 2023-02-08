@@ -59,16 +59,7 @@ function ButtonStack(props) {
 }
 
 export function CoverPage(props) {
-  const {
-    title,
-    subtitle,
-    description,
-    buttons,
-    onForceChange,
-    ipAddress,
-    isOffSite,
-    debug,
-  } = props;
+  const { title, subtitle, description, buttons, debug } = props;
 
   const windowSize = useWindowSize();
 
@@ -179,13 +170,13 @@ export function CoverPage(props) {
           zIndex={100}
           right={0}
           top={0}
-          onClick={() => {
-            onForceChange();
-          }}
+          onClick={() => {}}
         >
           <Box p={1}>
             <Typography textColor="gray" fontSize="0.6rem">
-              {ipAddress} {isOffSite ? "Offsite" : "Onsite"}
+              {windowSize.width} x {windowSize.height}
+              {windowSize.height > 780 ? " - Desktop" : " - Mobile"}
+              {window.ui.os}
             </Typography>
           </Box>
         </Box>
