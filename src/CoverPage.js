@@ -158,14 +158,13 @@ export function CoverPage(props) {
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
-          backgroundAttachment: "fixed",
           filter: "brightness(0.15)",
           height: windowSize.height ?? "100vh",
           width: windowSize.width ?? "100vw",
-          display: "flex",
+          display: "fixed",
+          position: "absolute",
           alignItems: "center",
           justifyContent: "center",
-          position: "absolute",
           zIndex: 0,
         }}
       ></Box>
