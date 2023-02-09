@@ -39,7 +39,7 @@ export default function MainScreen(props) {
         window.location = APPLE_DEVICE_URL;
       }
     }
-  });
+  }, [onSite, isAppleDevice, debug, APPLE_DEVICE_URL]);
 
   return (
     <CoverPage

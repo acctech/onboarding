@@ -20,37 +20,30 @@ function App() {
   const [onSite, setOnSite] = React.useState(false);
 
   React.useEffect(() => {
-    if (isAppleDevice) {
-      console.log("Apple Device, redirecting...");
-      if (!debug) {
-        window.location = APPLE_DEVICE_URL;
-      }
-    } else {
-      fetch(OTHER_DEVICE_URL, {
-        setTimeout: 500,
-        mode: "no-cors",
+    fetch(OTHER_DEVICE_URL, {
+      setTimeout: 500,
+      mode: "no-cors",
+    })
+      .then((response) => {
+        setOnSite(true);
+
+        console.log(
+          "Can reach other device url as " +
+            window.ui.os +
+            " device, redirecting to url."
+        );
+
+        if (!debug) {
+          console.info("Redirecting to: " + OTHER_DEVICE_URL);
+          window.location = OTHER_DEVICE_URL;
+        }
       })
-        .then((response) => {
-          setOnSite(true);
-
-          console.log(
-            "Can reach other device url as " +
-              window.ui.os +
-              " device, redirecting to url."
-          );
-
-          if (!debug) {
-            console.info("Redirecting to: " + OTHER_DEVICE_URL);
-            window.location = OTHER_DEVICE_URL;
-          }
-        })
-        .catch((error) => {
-          console.log(
-            "Cannot reach other device url as " + window.ui.os + " device."
-          );
-        });
-    }
-  }, [isAppleDevice, debug]);
+      .catch((error) => {
+        console.log(
+          "Cannot reach other device url as " + window.ui.os + " device."
+        );
+      });
+  }, []);
 
   return (
     <CssVarsProvider>
