@@ -3,7 +3,10 @@ import EastIcon from "@mui/icons-material/East";
 import { CoverPage } from "./CoverPage";
 
 export default function MainScreen(props) {
-  const { debug, APPLE_DEVICE_URL, isAppleDevice, onSite } = props;
+  const { debug, APPLE_DEVICE_URL, isAppleDevice, onSite, isWinSupportedSite } =
+    props;
+
+  console.table(props);
 
   const chooseUserType = {
     title: "WELCOME TO",
@@ -13,10 +16,14 @@ export default function MainScreen(props) {
       (onSite ? "onsite" : "offsite") +
       " using a " +
       window.ui.os +
-      " device. " +
-      (isAppleDevice || onSite
-        ? "Redirecting..."
-        : "Your device is not supported for Offsite Setup. \nPlease wait until you are on campus to complete the setup process."),
+      " device" +
+      (isWinSupportedSite ? " at a Windows supported site" : "") +
+      "." +
+      (isAppleDevice || (onSite && isWinSupportedSite)
+        ? " Redirecting..."
+        : isWinSupportedSite
+        ? " Your device is not supported for Offsite Setup. \nPlease wait until you are on campus to complete the setup process."
+        : " Your device is not supported."),
     buttons: isAppleDevice
       ? []
       : [

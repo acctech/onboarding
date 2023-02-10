@@ -7,6 +7,9 @@ import MainScreen from "./MainScreen";
 const APPLE_DEVICE_URL = "https://start.cem.com.au";
 const OTHER_DEVICE_URL =
   "https://clearpass.cem.org.au/onboard/device_provisioning_2.php";
+let supportSiteIPs = ["60.241.110.90"];
+
+// supportSiteIPs.push("165.228.22.234");
 
 function App() {
   // Get Query Params if debug exists set debug to true
@@ -18,30 +21,48 @@ function App() {
     window.ui.os.toLowerCase().includes("ios");
 
   const [onSite, setOnSite] = React.useState(false);
+  const [isWinSupportedSite, setIsWinSupportedSite] = React.useState(false);
 
   React.useEffect(() => {
-    fetch(OTHER_DEVICE_URL, {
-      setTimeout: 500,
-      mode: "no-cors",
-    })
+    // ipify
+    fetch("https://api.ipify.org?format=json", {})
+      .then((response) => response.json())
       .then((response) => {
-        setOnSite(true);
+        console.table(response);
 
-        console.log(
-          "Can reach other device url as " +
-            window.ui.os +
-            " device, redirecting to url."
-        );
-
-        if (!debug) {
-          console.info("Redirecting to: " + OTHER_DEVICE_URL);
-          window.location = OTHER_DEVICE_URL;
+        let isSupported = false;
+        for (let i = 0; i < supportSiteIPs.length; i++) {
+          if (response.ip === supportSiteIPs[i]) {
+            isSupported = true;
+          }
         }
-      })
-      .catch((error) => {
-        console.log(
-          "Cannot reach other device url as " + window.ui.os + " device."
-        );
+        setIsWinSupportedSite(isSupported);
+
+        fetch(OTHER_DEVICE_URL, {
+          setTimeout: 100,
+          mode: "no-cors",
+        })
+          .then((response) => {
+            console.table(response);
+
+            setOnSite(true);
+
+            console.log(
+              "Can reach other device url as " +
+                window.ui.os +
+                " device, redirecting to url."
+            );
+
+            if (!debug) {
+              console.info("Redirecting to: " + OTHER_DEVICE_URL);
+              window.location = OTHER_DEVICE_URL;
+            }
+          })
+          .catch((error) => {
+            console.log(
+              "Cannot reach other device url as " + window.ui.os + " device."
+            );
+          });
       });
   }, []);
 
@@ -53,6 +74,7 @@ function App() {
         APPLE_DEVICE_URL={APPLE_DEVICE_URL}
         isAppleDevice={isAppleDevice}
         onSite={onSite}
+        isWinSupportedSite={isWinSupportedSite}
       />
     </CssVarsProvider>
   );
