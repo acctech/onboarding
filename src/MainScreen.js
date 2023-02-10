@@ -3,10 +3,9 @@ import EastIcon from "@mui/icons-material/East";
 import { CoverPage } from "./CoverPage";
 
 export default function MainScreen(props) {
-  const { debug, APPLE_DEVICE_URL, isAppleDevice, onSite, isWinSupportedSite } =
-    props;
+  const { debug, isAppleDevice, onSite, isWinSupportedSite } = props;
 
-  console.table(props);
+  // console.table(props);
 
   const chooseUserType = {
     title: "WELCOME TO",
@@ -22,8 +21,8 @@ export default function MainScreen(props) {
       (isAppleDevice || (onSite && isWinSupportedSite)
         ? " Redirecting..."
         : isWinSupportedSite
-        ? " Your device is not supported for Offsite Setup. \nPlease wait until you are on campus to complete the setup process."
-        : " Your device is not supported."),
+        ? " This device is not supported for Offsite Setup. \nPlease wait until you are on campus to complete the setup process."
+        : " This device is not supported."),
     buttons: isAppleDevice
       ? []
       : [
@@ -37,16 +36,6 @@ export default function MainScreen(props) {
           // },
         ],
   };
-
-  useEffect(() => {
-    if (isAppleDevice) {
-      console.log("Apple Device Recognised, redirecting...");
-      // Redirect with 3 second timeout
-      if (!debug) {
-        window.location = APPLE_DEVICE_URL;
-      }
-    }
-  }, [onSite, isAppleDevice, debug, APPLE_DEVICE_URL]);
 
   return (
     <CoverPage
