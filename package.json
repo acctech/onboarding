@@ -1,7 +1,7 @@
 {
   "name": "onboarding",
   "version": "0.1.0",
-  "homepage": "https://acctech.github.io/onboarding",
+  "homepage": "https://start.cem.com.au",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.5",
