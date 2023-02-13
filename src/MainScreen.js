@@ -44,6 +44,7 @@ export default function MainScreen(props) {
       description={chooseUserType.description}
       buttons={chooseUserType.buttons}
       debug={debug}
+      isWinSupportedSite={isWinSupportedSite}
     />
   );
 }

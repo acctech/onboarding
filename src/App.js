@@ -4,7 +4,7 @@ import { CssVarsProvider } from "@mui/joy/styles";
 import CssBaseline from "@mui/joy/CssBaseline";
 import MainScreen from "./MainScreen";
 
-const APPLE_DEVICE_URL = "https://start.cem.com.au";
+const APPLE_DEVICE_URL = "https://cemschools.jamfcloud.com/enrol";
 const OTHER_DEVICE_URL =
   "https://clearpass.cem.org.au/onboard/device_provisioning_2.php";
 let supportSiteIPs = ["60.241.110.90"];

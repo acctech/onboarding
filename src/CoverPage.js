@@ -59,7 +59,8 @@ function ButtonStack(props) {
 }
 
 export function CoverPage(props) {
-  const { title, subtitle, description, buttons, debug } = props;
+  const { title, subtitle, description, buttons, debug, isWinSupportedSite } =
+    props;
 
   const windowSize = useWindowSize();
 
@@ -177,10 +178,8 @@ export function CoverPage(props) {
           onClick={() => {}}
         >
           <Box p={1}>
-            <Typography textColor="gray" fontSize="0.6rem">
-              {windowSize.width} x {windowSize.height}
-              {windowSize.height > 780 ? " - Desktop" : " - Mobile"}
-              {window.ui.os}
+            <Typography textColor="white" fontSize="1rem">
+              {isWinSupportedSite ? " Windows Allowed" : " Windows Not Allowed"}
             </Typography>
           </Box>
         </Box>
