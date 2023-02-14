@@ -27,6 +27,7 @@
     "build": "react-scripts build",
     "predeploy": "npm run build",
     "deploy": "echo start.cem.com.au > ./build/CNAME && gh-pages -d build",
+    "testdeploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
