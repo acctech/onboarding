@@ -3,7 +3,7 @@ import EastIcon from "@mui/icons-material/East";
 import { CoverPage } from "./CoverPage";
 
 export default function MainScreen(props) {
-  const { debug, isAppleDevice, onSite, isWinSupportedSite } = props;
+  const { debug, isAppleDevice, onSite, isWinSupportedSite, ipAddress } = props;
 
   // console.table(props);
 
@@ -45,6 +45,8 @@ export default function MainScreen(props) {
       buttons={chooseUserType.buttons}
       debug={debug}
       isWinSupportedSite={isWinSupportedSite}
+      onSite={onSite}
+      ipAddress={ipAddress}
     />
   );
 }

@@ -59,8 +59,16 @@ function ButtonStack(props) {
 }
 
 export function CoverPage(props) {
-  const { title, subtitle, description, buttons, debug, isWinSupportedSite } =
-    props;
+  const {
+    title,
+    subtitle,
+    description,
+    buttons,
+    debug,
+    isWinSupportedSite,
+    onSite,
+    ipAddress,
+  } = props;
 
   const windowSize = useWindowSize();
 
@@ -176,10 +184,27 @@ export function CoverPage(props) {
           right={0}
           top={0}
           onClick={() => {}}
+          flexDirection="column"
+          display="flex"
+          alignItems="flex-end"
         >
           <Box p={1}>
             <Typography textColor="white" fontSize="1rem">
-              {isWinSupportedSite ? " Windows Allowed" : " Windows Not Allowed"}
+              {ipAddress
+                ? isWinSupportedSite
+                  ? " Windows Allowed"
+                  : " Windows Not Allowed"
+                : "Couldn't get to api.ipify.org"}
+            </Typography>
+          </Box>
+          <Box p={1}>
+            <Typography textColor="white" fontSize="1rem">
+              {onSite ? "Can reach clearpass" : "Cannot reach clearpass"}
+            </Typography>
+          </Box>
+          <Box p={1}>
+            <Typography textColor="white" fontSize="1rem">
+              {window.ui.os}
             </Typography>
           </Box>
         </Box>

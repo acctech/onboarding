@@ -21,6 +21,7 @@ function App() {
 
   const [onSite, setOnSite] = React.useState(false);
   const [isWinSupportedSite, setIsWinSupportedSite] = React.useState(false);
+  const [ipAddress, setIpAddress] = React.useState("");
 
   React.useEffect(() => {
     if (debug) console.log("Debug Mode: ", debug);
@@ -30,6 +31,7 @@ function App() {
       .then((response) => response.json())
       .then((response) => {
         // console.table(response);
+        setIpAddress(response.ip);
 
         let isSupported = false;
         for (let i = 0; i < supportSiteIPs.length; i++) {
@@ -92,6 +94,7 @@ function App() {
         isAppleDevice={isAppleDevice}
         onSite={onSite}
         isWinSupportedSite={isWinSupportedSite}
+        ipAddress={ipAddress}
       />
     </CssVarsProvider>
   );
