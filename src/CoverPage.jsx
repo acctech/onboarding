@@ -72,6 +72,9 @@ export function CoverPage(props) {
 
   const windowSize = useWindowSize();
 
+  const logoURL = "./cem-logo.png";
+  const bgImageURL = "/bg.jpg";
+
   return (
     <Box
       sx={{
@@ -154,7 +157,7 @@ export function CoverPage(props) {
         >
           <Box width={windowSize.height > 780 ? "20%" : "10%"}>
             <img
-              src={process.env.PUBLIC_URL + "/cem-logo.png"}
+              src={logoURL}
               width="100%"
               alt="Christian Education Ministries"
             ></img>
@@ -163,7 +166,7 @@ export function CoverPage(props) {
       </Box>
       <Box
         sx={{
-          backgroundImage: "url(" + process.env.PUBLIC_URL + "/bg.jpg)",
+          backgroundImage: "url(" + bgImageURL + ")",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
@@ -188,7 +191,17 @@ export function CoverPage(props) {
           display="flex"
           alignItems="flex-end"
         >
-          <Box p={1}>
+          <Box
+            p={0.5}
+            display="flex"
+            alignItems="end"
+            justifyContent="center"
+            flexDirection="column"
+          >
+            <Typography textColor="white" fontSize="1rem">
+              Your IP Address: {ipAddress}
+            </Typography>
+
             <Typography textColor="white" fontSize="1rem">
               {ipAddress
                 ? isWinSupportedSite
@@ -196,13 +209,11 @@ export function CoverPage(props) {
                   : " Windows Not Allowed"
                 : "Couldn't get to api.ipify.org"}
             </Typography>
-          </Box>
-          <Box p={1}>
+
             <Typography textColor="white" fontSize="1rem">
               {onSite ? "Can reach clearpass" : "Cannot reach clearpass"}
             </Typography>
-          </Box>
-          <Box p={1}>
+
             <Typography textColor="white" fontSize="1rem">
               {window.ui.os}
             </Typography>
